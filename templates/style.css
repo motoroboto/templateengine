@@ -1,0 +1,23 @@
+body {
+    background-image: url('https://wallpapercave.com/wp/wp2456250.jpg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.jumbotron {
+    background: rgba(255,255,255,0.7);
+    border-radius: 0px;
+    margin-top: 20px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.text-center {
+    font-size: 60px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 200;
+    opacity: 100%;
+    color: black;
+    line-height: 55px;
+}
