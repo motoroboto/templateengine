@@ -5,6 +5,7 @@ const questions = require("./lib/questions");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
+const mainTemplate = fs.readFileSync('./templates/main.html', 'utf8');
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
@@ -22,7 +23,7 @@ function askQuestions() {
             if (answer.addMore === 'YES') {
                 addEmployee()
             } else {
-                return
+                writePage();
             };
         });
 };
@@ -33,10 +34,22 @@ function addEmployee() {
             if (answer.addMore === 'YES') {
                 addEmployee()
             } else {
-                return
+                writePage();
             };
         });
 }
+
+function writePage() {
+    fs.writeFile('output/index.html',
+
+        `${mainTemplate}`,
+
+        function (err) {
+            if (err) throw err;
+            console.log('Saved!');
+        });
+}
+
 
 askQuestions();
 
