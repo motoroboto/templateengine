@@ -1,6 +1,7 @@
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+const questions = require("./lib/questions");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
@@ -13,54 +14,31 @@ const render = require("./lib/htmlRenderer");
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-inquirer
-    .prompt([
-        {
-            name: 'employeeType',
-            type: 'list',
-            message: 'What Kind of Employee Would You Like to Add?',
-            choices: ["Manager", "Engineer", "Intern"],
-        },
-        {
-            name: 'employeeName',
-            type: 'input',
-            message: `What is the name of this employee?`,
-        },
-        {
-            name: 'employeeId',
-            type: 'input',
-            message: `What is the employees ID?`,
-        },
-        {
-            name: 'employeeEmail',
-            type: 'input',
-            message: `What is the employees email address?`,
-        },
-        {
-            name: 'employeeNumber',
-            type: 'input',
-            message: `What is the employees Phone Number?`,
-            when: (answers) => answers.employeeType === 'Manager',
-        },
-        {
-            name: 'github',
-            type: 'input',
-            message: `What is the employee's Github address?`,
-            when: (answers) => answers.employeeType === 'Engineer',
-        },
-        {
-            name: 'employeeSchool',
-            type: 'input',
-            message: `What School does this employee attend?`,
-            when: (answers) => answers.employeeType === 'Intern',
-        },
-    ])
 
-    .then((answer) => {
-        employeeType = answer.employeeType;
-        employeeName = answer.employeeName;
-        console.log(`The ${employeeType} is ${employeeName}`);
-    });
+function askQuestions() {
+    inquirer
+        .prompt(questions.managerQuestions)
+        .then((answer) => {
+            if (answer.addMore === 'YES') {
+                addEmployee()
+            } else {
+                return
+            };
+        });
+};
+function addEmployee() {
+    inquirer
+        .prompt(questions.employeeQuestions)
+        .then((answer) => {
+            if (answer.addMore === 'YES') {
+                addEmployee()
+            } else {
+                return
+            };
+        });
+}
+
+askQuestions();
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
