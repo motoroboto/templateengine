@@ -15,9 +15,16 @@ body {
 
 .text-center {
     font-size: 60px;
-    font-family: 'Roboto', sans-serif;
     font-weight: 200;
-    opacity: 100%;
     color: black;
     line-height: 55px;
+}
+
+.text-center,
+.card-title {
+    font-family: 'Roboto', sans-serif;
+}
+
+.employee-card {
+    margin: 30px;
 }
